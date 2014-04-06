@@ -1,0 +1,19 @@
+{
+    "manifest_version": 2,
+    "browser_action": {
+        "default_icon": "imgs/icon48.png",
+        "default_popup": "popup.html"
+    },
+    "background": {
+        "scripts": ["lib/jquery-2.1.0.min.js", "lib/jit-yc.js", "helpers.js", "chromeCrawlBG.js"]
+    },
+    "description": "Crawl a url for interesting links!",
+    "icons": {
+        "48": "images/icon48.png"
+    },
+
+    "name": "Chrome Crawler",
+    "options_page": "options.html",
+    "permissions": [ "tabs", "<all_urls>" ],
+    "version": "0.6"
+}
