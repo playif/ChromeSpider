@@ -4,6 +4,22 @@
 
 var div = $('div');
 var port = chrome.runtime.connect();
+var bg;
+//console.log(chrome.tabs);
+//chrome.runtime.getBackgroundPage(function(back){
+//    bg=back;
+//    bg.removeCurrentTab();
+//
+//    alert('hi');
+//});
+
+
+port.postMessage($('title').text());
+
+$('document').ready(function(){
+    port.postMessage('fin');
+});
+
 
 
 port.onMessage.addListener(function (msg) {
