@@ -1,7 +1,7 @@
 /**
  * Created by Tim on 2014/4/6.
  */
-
+/*, "background", "notifications", "unlimitedStorage", "webRequest", "webRequestBlocking"*/
 var div = $('div');
 var port = chrome.runtime.connect();
 var bg;
