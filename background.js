@@ -12,7 +12,7 @@ var crawlerTabs = [];
 
 function createCrawlerTab() {
     chrome.tabs.create({url: 'blank:', active: false, pinned: true}, function (tab) {
-        crawlerTabs.add(tab.id);
+        crawlerTabs.add(tab.id); 
     });
 }
 
