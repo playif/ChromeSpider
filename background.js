@@ -1,13 +1,33 @@
 /**
  * Created by Tim on 2014/4/6.
  */
-var i = 0;
+//var i = 0;
 
-var spider=(function(){
+//var spider=(function(){
+//
+//}());
 
-}());
+var crawlerTabs = [];
 
 
+function createCrawlerTab() {
+    chrome.tabs.create({url: 'blank:', active: false, pinned: true}, function (tab) {
+        crawlerTabs.add(tab.id);
+    });
+}
+
+chrome.tabs.onRemoved.addListener(function (tab) {
+    if ($.inArray(tab.id, crawlerTabs)) {
+        //TODO remove logic
+        remove(tab, crawlerTabs);
+    }
+});
+
+function remove(obj, array) {
+    return $.grep(array, function (value) {
+        return value != obj;
+    });
+}
 //setInterval(loop, 2000);
 
 //window.open("background.html#0", "bg", "background");
@@ -17,7 +37,7 @@ function loop() {
 
 //    chrome.tabs.captureVisibleTab(function (dataURL) {
 
-    chrome.tabs.create({url: 'http://s.weibo.com/weibo/%E5%8C%97%E4%BA%AC' , active: false}, function (tab) {
+    chrome.tabs.create({url: 'http://s.weibo.com/weibo/%E5%8C%97%E4%BA%AC', active: false}, function (tab) {
 //            chrome.windows.create({tabId: tab.id,  focused: false}, function (window) {
 //                chrome.windows.update(window.id, {state: 'minimized'});
 
@@ -53,15 +73,15 @@ function loop() {
 
 }
 
-function removeCurrentTab(){
-    chrome.tabs.getCurrent(function(tab){
+function removeCurrentTab() {
+    chrome.tabs.getCurrent(function (tab) {
         chrome.tabs.remove(tab.id);
     });
 
 }
 
 
-chrome.tabs.onUpdated.addListener(function(){
+chrome.tabs.onUpdated.addListener(function () {
 
 });
 
@@ -100,13 +120,13 @@ chrome.browserAction.onClicked.addListener(function (tab) {
 
 chrome.runtime.onConnect.addListener(function (port) {
     //console.log(port.name == "knockknock");
-    var tab=port.sender.tab;
+    var tab = port.sender.tab;
 
     port.onMessage.addListener(function (msg) {
         console.log(msg);
         port.postMessage({ack: "200"});
 
-        switch(msg){
+        switch (msg) {
             case 'fin':
                 //chrome.tabs.remove(tab.id);
                 break;
